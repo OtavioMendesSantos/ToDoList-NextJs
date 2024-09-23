@@ -1,0 +1,13 @@
+$border-color: #d7dde9;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+  border-bottom: 1px solid $border-color;
+  //   position: sticky;
+  margin-inline: 56px;
+}

@@ -6,8 +6,14 @@ $border-color: #d7dde9;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  padding: 1.5rem;
+  padding: 1.5rem 0;
   border-bottom: 1px solid $border-color;
-  //   position: sticky;
   margin-inline: 56px;
+
+  @media screen and (max-width: 600px) {
+    margin-inline: 1rem;
+    h1{
+      font-size: 1rem;
+    }
+  }
 }

@@ -24,11 +24,12 @@
     align-items: center;
     position: relative;
     cursor: pointer;
-    padding-left: 1.8rem;
+    padding-left: calc(1.5rem + 1rem); // CheckBox + Espaçamento
 
     &::before {
       content: "";
       display: inline-block;
+      box-sizing: border-box;
       width: 1.5rem;
       height: 1.5rem;
       border: 1px solid $border-color;
@@ -40,29 +41,37 @@
       top: 50%;
       transform: translateY(-50%);
     }
-
-    & input:checked + &::before {
-      background-color: $button-primary-color;
-      border-color: transparent;
-    }
-
-    input:checked + &::after {
-      content: "✔";
-      color: white;
-      position: absolute;
-      left: 0.35rem;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1rem;
-    }
   }
 
-  &.done {
-    text-decoration: line-through;
-    color: $text-secondary;
+  & input[type="checkbox"]:checked + label::before {
+    background-color: $primary-color-light;
+    border-color: $primary-color;
   }
 
-//   p {
-//     width: 100%;
-//   }
+  & input[type="checkbox"]:checked + label::after {
+    content: url("/check.svg");
+    color: $primary-color;
+    position: absolute;
+    left: 0.35rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+  }
+}
+
+.done {
+  text-decoration: line-through;
+  color: $text-secondary;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

@@ -2,30 +2,47 @@ $background-color: rgb(255, 255, 255);
 $overlay-color: rgba(240, 240, 240, 0.8);
 
 .modalContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: $overlay-color;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $overlay-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal {
-    background-color: $background-color;
-    padding: 2rem  ;
-    border-radius: 1rem;
-    box-shadow: 0 24px 48px #1018282E;
-    position: relative;
-    z-index: 1;
-    min-width: 200px;
-    min-height: 300px;
+  background-color: $background-color;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 24px 48px #1018282e;
+  position: relative;
+  z-index: 1;
+  min-width: 200px;
+  min-height: 300px;
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  h1,
+  p {
+    text-align: left;
     width: 100%;
-    max-width: 450px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+  }
+
+  @media screen and (max-width: 600px) {
+   min-height: 100vh;
+   min-width: 100vw;
+   height: 100%;
+   width: 100%;
+   border-radius: 0;
+   justify-content:flex-start;
+   gap: 1rem;
+  }
 }
+

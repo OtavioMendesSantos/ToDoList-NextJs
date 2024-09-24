@@ -1,5 +1,5 @@
 @import "normalize.css"; // normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css
-@import './_variables.scss';
+@import "./_variables.scss";
 
 * {
   box-sizing: border-box;
@@ -37,9 +37,9 @@ input {
   font-size: 1rem;
 }
 
-.text-secondary{
-    font-size: 1rem;
-    color: $text-secondary;
+.text-secondary {
+  font-size: 1rem;
+  color: $text-secondary;
 }
 
 button {
@@ -65,13 +65,32 @@ button {
   transition: background-color 0.3s ease-in-out;
   color: white;
   &:disabled {
-    color: 'initial';
+    color: "initial";
     background: $button-default-color;
   }
 }
 
-.main{   
-    display: grid;
-    grid-template-columns: 1fr 450px 1fr;
-    margin-top: 40px;
+.btn-secondary {
+  background: $button-secondary-color;
+  font-weight: 500;
+  transition: background-color 0.3s ease-in-out;
+  color: white;
+  &:disabled {
+    color: "initial";
+    background: $button-default-color;
+  }
 }
+
+.btn-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+  width: 100%;
+
+  button {
+    flex: 1 1 100px;
+  }
+}
+

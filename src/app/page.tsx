@@ -16,30 +16,31 @@ export interface Item {
 
 export default function Home() {
   const router = useRouter();
-  const [nome] = useState<string>(JSON.parse(localStorage.getItem("config") || "{}")?.nome || "");
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
   const [listItens, setListItens] = useState<Item[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false)
+
+  // Verificar se o localStorage está disponível no lado do cliente
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedConfig = JSON.parse(localStorage.getItem("config") || "{}");
+
+      if (!savedConfig?.nome) {
+        router.push("/boasvindas");
+      }
+
+      const itensLocalStorage = localStorage.getItem("list");
+      const listItens: Item[] = itensLocalStorage ? JSON.parse(itensLocalStorage) : [];
+      setListItens(listItens);
+    }
+  }, [router]);
 
   useEffect(() => {
-    if (!!nome) return;
-    router.push("/boasvindas")
-  }, [nome, router]);
-
-  useEffect(() => {
-    const itensLocalStorage = localStorage.getItem("list");
-    const listItens: Item[] = itensLocalStorage ? JSON.parse(itensLocalStorage) : [];
-    setListItens(listItens);
-    setIsLoaded(true)
-  }, []);
-
-  useEffect(() => {
-    if (!isLoaded) return
     if (listItens.length > 0) {
       localStorage.setItem("list", JSON.stringify(listItens));
     }
   }, [listItens]);
 
+  // Atualizar o status de um item (pending/done)
   const updateItemStatus = (id: string) => {
     setListItens((prevItens) =>
       prevItens.map((item) =>
@@ -50,10 +51,17 @@ export default function Home() {
     );
   };
 
+  // Remover item da lista
   const removeItem = (id: string) => {
+    if (listItens.length === 1) {
+      localStorage.removeItem("list");
+      setListItens([]);
+      return;
+    }
     setListItens((prevItens) => prevItens.filter((item) => item.id !== id));
   };
 
+  // Adicionar um novo item à lista
   const addItem = (item: string) => {
     setListItens((prevItens) => [
       ...prevItens,
@@ -62,8 +70,8 @@ export default function Home() {
         id: uuid(),
         status: 'pending',
       },
-    ])
-  }
+    ]);
+  };
 
   return (
     <>
@@ -84,8 +92,8 @@ export default function Home() {
                           <Activity
                             key={item.id}
                             item={item}
-                            onUpdateStatus={updateItemStatus} // Passa a função de atualizar status
-                            onRemove={removeItem} // Passa a função de remover item
+                            onUpdateStatus={updateItemStatus}
+                            onRemove={removeItem}
                           />
                         ))}
                     </div>
@@ -99,8 +107,8 @@ export default function Home() {
                         <Activity
                           key={item.id}
                           item={item}
-                          onUpdateStatus={updateItemStatus} // Passa a função de atualizar status
-                          onRemove={removeItem} // Passa a função de remover item
+                          onUpdateStatus={updateItemStatus}
+                          onRemove={removeItem}
                         />
                       ))}
                   </div>

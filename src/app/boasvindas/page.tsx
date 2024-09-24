@@ -1,31 +1,33 @@
 'use client';
-import Modal from '@/components/Modal/Modal'
-import definirSaudacao from '@/utils/definirSaudacao'
-import React, { useEffect, useState } from 'react'
+import Modal from '@/components/Modal/Modal';
+import definirSaudacao from '@/utils/definirSaudacao';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 
 const BoasVindas = () => {
-  const [nome, setNome] = useState("")
+  const [nome, setNome] = useState("");
   const router = useRouter();
 
   useEffect(() => {
-    const localConfig = localStorage.getItem("config")
-    const configObj = JSON.parse(localConfig ?? "{}")
+    const localConfig = localStorage.getItem("config");
+    const configObj = JSON.parse(localConfig ?? "{}");
+    // Verifica se o nome já está definido no localStorage
     if (configObj?.nome) {
-      setNome(configObj?.nome)
-      router.push('/')
+      setNome(configObj.nome); // Apenas define o nome, não redireciona imediatamente
+      // Redirecionar apenas se já houver nome
+      router.push('/');
     }
-  }, [])
+  }, [router]);
 
   const handleConfirmar = () => {
     if (!nome || nome.length < 3) {
-      return
+      return;
     }
-    const config = { nome }
-    localStorage.setItem("config", JSON.stringify(config))
-    setNome(nome)
-    router.push('/')
-  }
+    const config = { nome };
+    localStorage.setItem("config", JSON.stringify(config));
+    // Redireciona após confirmar o nome
+    router.push('/');
+  };
 
   return (
     <Modal>
@@ -36,7 +38,7 @@ const BoasVindas = () => {
         Confirmar
       </button>
     </Modal>
-  )
-}
+  );
+};
 
-export default BoasVindas
+export default BoasVindas;

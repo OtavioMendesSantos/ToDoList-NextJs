@@ -10,6 +10,10 @@ $border-color: #d7dde9;
   border-bottom: 1px solid $border-color;
   margin-inline: 56px;
 
+  div{
+    flex-basis: 250px;
+  }
+
   @media screen and (max-width: 600px) {
     margin-inline: 1rem;
     h1{

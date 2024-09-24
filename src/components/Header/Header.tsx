@@ -28,7 +28,9 @@ const Header = () => {
                 <img src='/logo.png' alt="Logo" />
             </div>
             <h1>Bem-vindo de volta, {userName} </h1>
-            <p>{getDay()}</p>
+            <div>
+                <p>{getDay()}</p>
+            </div>
         </header>
     )
 }
